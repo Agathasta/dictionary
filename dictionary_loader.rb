@@ -7,6 +7,16 @@ class DictionaryLoader
   end
 
   def load_diccionary
-    @diccionary = File.readlines(@path)
+    @file = begin
+      File.readlines(@path)
+    rescue StandardError
+      exit
+    end
+  end
+
+  def display
+    @diccionary = []
+    @file.each { |line| @diccionary << line.strip }
+    @diccionary
   end
 end
