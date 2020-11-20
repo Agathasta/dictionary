@@ -19,7 +19,27 @@ class DictionaryUI
       gets.chomp
     end
   end
+
+  def stats
+    puts 'Dictionary successfully loaded' unless @diccionary.display.nil?
+    puts "Your dictionary contains #{@diccionary.display.size} words."
+    puts 'Word frequency by starting letter:'
+    count_words
+  end
+
+  def count_words
+    @alphabet = Hash.new(0)
+    ('A'..'Z').each do |letter|
+      @diccionary.display.each do |word|
+        @alphabet[letter] += 1 if word[0].upcase == letter
+      end
+    end
+    @alphabet.each do |letter, count|
+      puts "#{letter}: #{count}"
+    end
+  end
 end
 
 d = DictionaryUI.new
+d.stats
 # d.run
