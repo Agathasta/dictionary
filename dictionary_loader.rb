@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 
 class DictionaryLoader
-
   def initialize(path)
     @path = path
     load_diccionary
