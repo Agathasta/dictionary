@@ -11,13 +11,22 @@ class DictionaryUI
   end
 
   def ask_path
-    puts "Is your dictionary's path = '5desk.txt'? (Y / N)"
-    if gets.chomp == 'Y'
+    puts "Is your dictionary called '5desk.txt'? (Y / N)"
+    if gets.chomp.upcase == 'Y'
       '5desk.txt'
     else
-      puts "So what's the path then?"
-      gets.chomp
+      other_path
     end
+  end
+
+  def other_path
+    puts "So what's the path then?"
+    loop do
+      @path = gets.chomp
+      break if File.exist?(@path)
+      puts "File doesn't exist! Enter a new file:"
+    end
+    @path
   end
 
   def stats
