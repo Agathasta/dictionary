@@ -7,11 +7,7 @@ class DictionaryLoader
   end
 
   def load_diccionary
-    @file = begin
-      File.readlines(@path)
-    rescue StandardError
-      exit
-    end
+    @file = File.readlines(@path)
   end
 
   def display
