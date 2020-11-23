@@ -8,7 +8,7 @@ class Dictionary
 
   def display
     @dictionary = []
-    @file.each { |line| @dictionary << line.strip }
+    @file.each { |line| @dictionary << line.strip.downcase }
     @dictionary
   end
 end

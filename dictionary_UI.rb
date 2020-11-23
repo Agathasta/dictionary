@@ -59,7 +59,7 @@ class DictionaryUI
 
   def search
     puts "Write"
-    search = gets.chomp
+    search = gets.chomp.downcase
     searching = DictionarySearcher.new(@dictionary.display, search)
     puts searching.search
   end
