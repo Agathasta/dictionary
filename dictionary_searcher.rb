@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'dictionary_loader'
+require 'pry'
 
-class DictionarySearcher < DictionaryLoader
-  def display
-    super
+class DictionarySearcher
+  def initialize(dictionary, search)
+    @dictionary = dictionary
+    @search = Regexp.new search
+  end
+
+  def search
+    result = @dictionary.select { |w| w =~ @search }
   end
 end

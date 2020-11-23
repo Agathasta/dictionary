@@ -8,6 +8,8 @@ require_relative 'dictionary_searcher'
 require_relative 'results_saver'
 
 class DictionaryUI
+  attr_reader :dictionary
+
   def initialize
     loader = DictionaryLoader.new(ask_path)
     @dictionary = Dictionary.new(loader.file)
@@ -54,8 +56,16 @@ class DictionaryUI
       puts "#{letter}: #{count}"
     end
   end
+
+  def search
+    puts "Write"
+    search = gets.chomp
+    searching = DictionarySearcher.new(@dictionary.display, search)
+    puts searching.search
+  end
 end
 
 d = DictionaryUI.new
 d.stats
+d.search
 # d.run
