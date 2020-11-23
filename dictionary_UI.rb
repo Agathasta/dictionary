@@ -42,19 +42,7 @@ class DictionaryUI
     puts 'Dictionary successfully loaded' unless @dictionary.display.nil?
     puts "Your dictionary contains #{@dictionary.display.size} words."
     puts 'Word frequency by starting letter:'
-    count_words
-  end
-
-  def count_words
-    @alphabet = Hash.new(0)
-    ('A'..'Z').each do |letter|
-      @dictionary.display.each do |word|
-        @alphabet[letter] += 1 if word[0].upcase == letter
-      end
-    end
-    @alphabet.each do |letter, count|
-      puts "#{letter}: #{count}"
-    end
+    @dictionary.count_words
   end
 
   def search
