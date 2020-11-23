@@ -1,18 +1,10 @@
 # frozen_string_literal: true
 
 class DictionaryLoader
+  attr_reader :file
+
   def initialize(path)
-    @path = path
-    load_diccionary
+    @file = File.readlines(path)
   end
 
-  def load_diccionary
-    @file = File.readlines(@path)
-  end
-
-  def display
-    @diccionary = []
-    @file.each { |line| @diccionary << line.strip }
-    @diccionary
-  end
 end

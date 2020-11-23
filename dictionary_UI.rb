@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry'
+
 require_relative 'dictionary_loader'
 require_relative 'dictionary'
 require_relative 'dictionary_searcher'
@@ -7,7 +9,8 @@ require_relative 'results_saver'
 
 class DictionaryUI
   def initialize
-    @diccionary = DictionaryLoader.new(ask_path)
+    loader = DictionaryLoader.new(ask_path)
+    @dictionary = Dictionary.new(loader.file)
   end
 
   def ask_path
@@ -34,8 +37,8 @@ class DictionaryUI
   end
 
   def stats
-    puts 'Dictionary successfully loaded' unless @diccionary.display.nil?
-    puts "Your dictionary contains #{@diccionary.display.size} words."
+    puts 'Dictionary successfully loaded' unless @dictionary.display.nil?
+    puts "Your dictionary contains #{@dictionary.display.size} words."
     puts 'Word frequency by starting letter:'
     count_words
   end
@@ -43,7 +46,7 @@ class DictionaryUI
   def count_words
     @alphabet = Hash.new(0)
     ('A'..'Z').each do |letter|
-      @diccionary.display.each do |word|
+      @dictionary.display.each do |word|
         @alphabet[letter] += 1 if word[0].upcase == letter
       end
     end

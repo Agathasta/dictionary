@@ -1,4 +1,9 @@
 # frozen_string_literal: true
 
-class DictionarySearcher
+require_relative 'dictionary_loader'
+
+class DictionarySearcher < DictionaryLoader
+  def display
+    super
+  end
 end
