@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Dictionary
-
-  def initialize(file)     
+  def initialize(file)
     @file = file
   end
 

@@ -6,5 +6,4 @@ class DictionaryLoader
   def initialize(path)
     @file = File.readlines(path)
   end
-
 end

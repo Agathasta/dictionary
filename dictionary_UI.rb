@@ -8,23 +8,14 @@ require_relative 'dictionary_searcher'
 require_relative 'results_saver'
 
 class DictionaryUI
-  attr_reader :dictionary
-
   def initialize
     loader = DictionaryLoader.new(ask_path)
     @dictionary = Dictionary.new(loader.file)
   end
 
   def ask_path
-    puts "Is your dictionary called '5desk.txt'? (Y / N, q to quit)"
-    answer = gets.chomp
-    if answer.upcase == 'Y'
-      '5desk.txt'
-    elsif answer.upcase == 'Q'
-      exit
-    else
-      other_path
-    end
+    puts "Is your dictionary called '5desk.txt'? (Y / N)"
+    gets.chomp.upcase == 'Y' ? '5desk.txt' : other_path
   end
 
   def other_path
@@ -33,6 +24,7 @@ class DictionaryUI
       @path = gets.chomp
       exit if @path.upcase == 'Q'
       break if File.exist?(@path)
+
       puts "File doesn't exist! Enter a new file: (q to quit)"
     end
     @path
@@ -46,14 +38,18 @@ class DictionaryUI
   end
 
   def search
-    puts "Write"
+    puts 'Write'
     search = gets.chomp.downcase
-    searching = DictionarySearcher.new(@dictionary.display, search)
-    puts searching.search
+    @searching = DictionarySearcher.new(@dictionary.display, search)
+    results
+  end
+
+  def results
+    puts "#{@searching.search.size} words found:"
+    puts @searching.search
   end
 end
 
 d = DictionaryUI.new
 d.stats
 d.search
-# d.run
