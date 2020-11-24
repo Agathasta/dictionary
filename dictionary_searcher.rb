@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 class DictionarySearcher
   def initialize(dictionary, choice, search)
     @dictionary = dictionary
