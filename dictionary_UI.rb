@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 require_relative 'dictionary_loader'
 require_relative 'dictionary'
 require_relative 'dictionary_searcher'
