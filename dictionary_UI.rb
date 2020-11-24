@@ -38,18 +38,38 @@ class DictionaryUI
   end
 
   def search
-    puts 'Write'
-    search = gets.chomp.downcase
-    @searching = DictionarySearcher.new(@dictionary.display, search)
+    search_choice
+    search_term
     results
   end
 
+  def search_choice
+    puts 'What kind of search?' 
+    puts '# 1: Exact'
+    puts '# 2: Partial'
+    puts '# 3: Begins With'
+    puts '# 4: Ends With'
+    loop do
+      @choice = gets.chomp
+      exit if @choice.upcase == 'Q'
+      break if (1..4).include? @choice.to_i
+
+      puts "Wrong choice! Choose a number from 1 to 4 (or q to quit):"
+    end
+  end
+
+  def search_term
+    puts 'Enter the search term:'
+    search_term = gets.chomp.downcase
+    @search = DictionarySearcher.new(@dictionary.display, @choice.to_i, search_term)
+  end
+
   def results
-    puts "#{@searching.search.size} words found:"
-    puts @searching.search
+    puts @search.search
+    puts "#{@search.search.size} words found"
   end
 end
 
 d = DictionaryUI.new
-d.stats
+# d.stats
 d.search
