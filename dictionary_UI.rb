@@ -53,7 +53,7 @@ class DictionaryUI
   end
 
   def search_choice
-    puts 'What kind of search?' 
+    puts 'What kind of search?'
     puts '# 1: Exact'
     puts '# 2: Partial'
     puts '# 3: Begins With'
@@ -64,7 +64,7 @@ class DictionaryUI
       exit if @choice.upcase == 'Q'
       break if (1..4).include? @choice.to_i
 
-      puts "Wrong choice! Choose a number from 1 to 4 (or q to quit):"
+      puts 'Wrong choice! Choose a number from 1 to 4 (or q to quit):'
       print '> '
     end
   end
@@ -83,9 +83,9 @@ class DictionaryUI
   end
 
   def save
-    puts "Do you want to save the results? (Y / N)"
+    puts 'Do you want to save the results? (Y / N)'
     print '> '
-    exit if gets.chomp.upcase == "N"
+    exit if gets.chomp.upcase == 'N'
     filepath
     save_file
   end
@@ -97,7 +97,7 @@ class DictionaryUI
     if File.exist?(@path)
       puts 'That file exists, overwrite? (Y / N)'
       print '> '
-      exit if gets.chomp.upcase == "N"
+      exit if gets.chomp.upcase == 'N'
     end
   end
 

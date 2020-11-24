@@ -3,7 +3,6 @@
 require 'pry'
 
 class DictionarySearcher
-
   def initialize(dictionary, choice, search)
     @dictionary = dictionary
     @choice = choice

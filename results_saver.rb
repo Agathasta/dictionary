@@ -8,7 +8,7 @@ class ResultsSaver
   end
 
   def write
-    File.open(@path,'w') do |file|
+    File.open(@path, 'w') do |file|
       file.write "You searched for #{@search_term}\n"
       file.write @search
     end
