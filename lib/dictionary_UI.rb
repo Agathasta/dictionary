@@ -12,15 +12,16 @@ class DictionaryUI
   end
 
   def ask_path
-    puts
-    puts "Is your dictionary called '5desk.txt'? (Y / N)"
-    print '> '
+    puts `clear`
+    puts "\e[35mIs the dictionary you want to use called '5desk.txt'? (Y / N)\e[0m"
+    puts "\e[37m(say Yes unless you have a long list of words in txt.format and know the path to it)\e[0m"
+    print "\e[35m> \e[0m"
     gets.chomp.upcase == 'Y' ? '5desk.txt' : other_path
   end
 
   def other_path
-    puts "So what's the path then? (q to quit)"
-    print '> '
+    puts "\e[35mSo what's the path then? (q to quit)\e[0m"
+    print "\e[35m> \e[0m"
     loop do
       @path = gets.chomp
       exit if @path.upcase == 'Q'
@@ -33,13 +34,13 @@ class DictionaryUI
   end
 
   def stats
-    puts 'Dictionary successfully loaded' unless @dictionary.display.empty?
-    puts 'Show statistics? (Y / N)'
-    print '> '
+    puts "\e[34mDictionary successfully loaded\e[0m" unless @dictionary.display.empty?
+    puts "\n\e[35mShow statistics? (Y / N)\e[0m"
+    print "\e[35m> \e[0m"
     if gets.chomp.upcase == 'Y'
-      puts 'Word frequency by starting letter:'
+      puts "\e[34mWord frequency by starting letter:\e[0m"
       @dictionary.count_words
-      puts "Your dictionary contains #{@dictionary.display.size} words."
+      puts "\e[34mYour dictionary contains #{@dictionary.display.size} words.\e[0m"
       puts
     end
   end
@@ -51,50 +52,50 @@ class DictionaryUI
   end
 
   def search_choice
-    puts 'What kind of search?'
+    puts "\e[35mWhat kind of search do you want to make?\e[0m"
     puts '# 1: Exact'
     puts '# 2: Partial'
     puts '# 3: Begins With'
     puts '# 4: Ends With'
-    print '> '
+    print "\e[35m> \e[0m"
     loop do
       @choice = gets.chomp
       exit if @choice.upcase == 'Q'
       break if (1..4).include? @choice.to_i
 
       puts 'Wrong choice! Choose a number from 1 to 4 (or q to quit):'
-      print '> '
+      print "\e[35m> \e[0m"
     end
   end
 
   def search_term
-    puts 'Enter the search term:'
-    print '> '
+    puts "\e[35mEnter the search term:\e[0m"
+    print "\e[35m> \e[0m"
     @search_term = gets.chomp.downcase
     @search = DictionarySearcher.new(@dictionary.display, @choice.to_i, @search_term)
   end
 
   def results
-    puts 'Results:'
+    puts "\e[34mResults:\e[0m"
     puts @search.search
-    puts "#{@search.search.size} words found"
+    puts "\e[34m#{@search.search.size} words found\e[0m"
   end
 
   def save
-    puts 'Do you want to save the results? (Y / N)'
-    print '> '
+    puts "\n\e[35mDo you want to save the results? (Y / N)\e[0m"
+    print "\e[35m> \e[0m"
     exit if gets.chomp.upcase == 'N'
     filepath
     save_file
   end
 
   def filepath
-    puts 'What filepath should we write results to? (.txt)'
-    print '> '
+    puts "\e[35mWhat filepath should we write results to? (.txt)\e[0m"
+    print "\e[35m> \e[0m"
     @path = gets.chomp
     if File.exist?(@path)
-      puts 'That file exists, overwrite? (Y / N)'
-      print '> '
+      puts "\e[35mThat file exists, overwrite? (Y / N)\e[0m"
+      print "\e[35m> \e[0m"
       exit if gets.chomp.upcase == 'N'
     end
   end
@@ -102,7 +103,7 @@ class DictionaryUI
   def save_file
     @saved_results = ResultsSaver.new(@path, @search_term, @search.search)
     @saved_results.write
-    puts 'File successfully overwritten!'
+    puts "\e[34mFile successfully written!\e[0m"
   end
 end
 
